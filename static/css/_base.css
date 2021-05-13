@@ -1,0 +1,120 @@
+* {
+	box-sizing: border-box;
+}
+
+html {
+	font-family: Helvetica, sans-serif;
+}
+
+body {
+	margin: 0;
+	text-align: center;
+	background-color: #f7f0f5;
+	color: black;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+	margin: 0;
+	padding: 0;
+}
+
+nav {
+	margin: 50px auto;
+}
+
+nav a {
+	border: 1px #61707d solid;
+	background-color: white;
+	border-radius: 10px;
+	margin-right: 10px;
+	padding: 5px 10px;
+	color: #61707d;
+	text-decoration: none;
+}
+
+nav a:visited {
+	color: #61707d;
+}
+
+nav a:last-of-type {
+	margin-left: none;
+}
+
+nav a:hover {
+	color: #1e152a;
+	border: 1px #1e152a solid;
+}
+
+h1 {
+	margin-bottom: 30px;
+}
+
+h3 {
+	margin-bottom: 20px;
+}
+
+p {
+	margin-bottom: 10px;
+}
+
+form div {
+	margin-bottom: 20px;
+}
+
+.filter {
+	margin-bottom: 20px;
+}
+
+.input-file {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.input-upload,
+input[type="number"] {
+	border: 1px #61707d solid;
+	background-color: white;
+	border-radius: 10px;
+	padding: 5px 10px;
+	color: #61707d;
+}
+
+button {
+	border: 1px #61707d solid;
+	background-color: white;
+	border-radius: 10px;
+	padding: 5px 10px;
+	color: #61707d;
+}
+
+.input-upload:hover,
+button:hover {
+	color: #1e152a;
+	border: 1px #1e152a solid;
+	cursor: pointer;
+}
+
+table,
+th,
+td {
+	border: 1px solid black;
+}
+
+table {
+	margin: 0 auto;
+}
+
+th,
+td {
+	padding: 5px 10px;
+}
