@@ -10,7 +10,6 @@ import csv, io
 from .models import Property
 from .filter import SqftFilter
 
-from django.views.generic import ListView
 from django_filters.views import FilterView
 
 # Create your views here.
@@ -21,6 +20,10 @@ def property_upload(request):
         return render(request, template)
 
     if request.method == 'POST':
+
+        if (not bool(request.FILES)):
+            return render(request, template)
+        
         csv_file = request.FILES['file']
 
         if not csv_file.name.endswith('.csv'):
@@ -52,11 +55,6 @@ def property_upload(request):
                 property.save() 
 
     return render(request, template)
-
-
-
-class PropertyList(ListView):
-    model = Property
 
 class FilterPropertyList(FilterView):
     model = Property
