@@ -25,34 +25,58 @@ def property_upload(request):
             return render(request, template)
         
         csv_file = request.FILES['file']
-
-        if not csv_file.name.endswith('.csv'):
-            messages.error(request,'File is not CSV type')
-
-        data_set = csv_file.read().decode('UTF-8')
-        io_string = io.StringIO(data_set)
-        next(io_string)
-
-        for column in csv.reader(io_string, delimiter=','):
-            if int(column[11]) < 1300000:
+        decoded_file = csv_file.read().decode('utf-8-sig').splitlines()
+        reader = csv.DictReader(decoded_file)
+        
+        for row in reader:
+            if int(row["Annual Rent"]) < 1300000:
                 pass
-            else:
-
+            else: 
                 property = Property.objects.create(
-                    property_name = column[0],
-                    property_sqft = int(column[1]),
-                    city = column[2],
-                    lease_number = column[3],
-                    lease_type = column[4],
-                    tenant_name = column[5],
-                    unit_number = int(column[6]),
-                    unit_sqft = int(column[7]),
-                    lease_begin_date = parse_date(column[8]),
-                    lease_end_date = parse_date(column[9]),
-                    annual_rent_sqft =Decimal(column[10]),
-                    annual_rent = int(column[11]),
-                )
-                property.save() 
+                    property_name = row["Property Name"],
+                    property_sqft = int(row["Property Sqft"]),
+                    city = row["City"],
+                    lease_number = row["Lease Number"],
+                    lease_type = row["Lease Type"],
+                    tenant_name = row["Tenant Name"],
+                    unit_number = int(row["Unit Number"]),
+                    unit_sqft = int(row["Unit Sqft"]),
+                    lease_begin_date = parse_date(row["Lease Begin Date"]),
+                    lease_end_date = parse_date(row["Lease End Date"]),
+                    annual_rent_sqft =Decimal(row["Annual Rent Sqft"]),
+                    annual_rent = int(row["Annual Rent"]),
+                    )
+                property.save()
+        
+
+        # csv_file = request.FILES['file']
+        # if not csv_file.name.endswith('.csv'):
+        #     messages.error(request,'File is not CSV type')
+
+        # data_set = csv_file.read().decode('UTF-8')
+        # io_string = io.StringIO(data_set)
+        # next(io_string)
+
+        # for column in csv.reader(io_string, delimiter=','):
+        #     if int(column[11]) < 1300000:
+        #         pass
+        #     else:
+
+        #         property = Property.objects.create(
+        #             property_name = column[0],
+        #             property_sqft = int(column[1]),
+        #             city = column[2],
+        #             lease_number = column[3],
+        #             lease_type = column[4],
+        #             tenant_name = column[5],
+        #             unit_number = int(column[6]),
+        #             unit_sqft = int(column[7]),
+        #             lease_begin_date = parse_date(column[8]),
+        #             lease_end_date = parse_date(column[9]),
+        #             annual_rent_sqft =Decimal(column[10]),
+        #             annual_rent = int(column[11]),
+        #         )
+        #         property.save() 
 
     return render(request, template)
 
